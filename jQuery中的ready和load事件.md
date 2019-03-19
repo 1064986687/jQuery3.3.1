@@ -1,4 +1,4 @@
->   jQuery中有3种针对文档加载的方式：
+ >   jQuery中有3种针对文档加载的方式：
     1、$(document).ready(function(){
         //...code
     })
@@ -20,8 +20,13 @@
 >   结论：
     ready和load的区别就在于资源文件的加载，ready构建了基本的DOM结构，所以对代码来说应该加载越快越好。不需要等到图片等资源都加载完后才去处理框架的加载，图片等资源过多load事件就会迟迟不触发。
     看看jQuery中怎么写的：
-    
+
     `
+    jQuery.readyException = function( error ) {
+        window.setTimeout( function() {
+            throw error;
+        } );
+    };
     // The deferred used on DOM ready
     var readyList = jQuery.Deferred();
 
